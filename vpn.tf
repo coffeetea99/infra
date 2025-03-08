@@ -3,26 +3,6 @@ provider "aws" {
   region = "ap-northeast-1"
 }
 
-resource "aws_instance" "vpn_jp" {
-  provider = aws.tokyo
-
-  # Ubuntu Server 22.04 LTS (HVM), SSD Volume Type
-  ami = "ami-0d979355d03fa2522" 
-  instance_type = "t3.micro"
-
-  key_name = aws_key_pair.aws_main.key_name
-
-  tags = {
-    Name = "vpn-jp"
-  }
-}
-
-resource "aws_eip" "vpn_jp" {
-  provider = aws.tokyo
-
-  instance = aws_instance.vpn_jp.id
-}
-
 resource "aws_default_vpc" "tokyo_default_vpc" {
   provider = aws.tokyo
 
